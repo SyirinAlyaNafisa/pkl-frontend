@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalkulator Sederhana</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f4f4f9;
+      }
+      .kalkulator {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 250px;
+      }
+      input,
+      select,
+      button {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 8px;
+        box-sizing: border-box;
+      }
+      button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      .hasil {
+        font-weight: bold;
+        margin-top: 10px;
+        font-size: 1.1em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="kalkulator">
+      <h2>Kalkulator JS</h2>
+
+      <!-- Input Angka Pertama -->
+      <input type="number" id="angka1" placeholder="Masukkan angka pertama" />
+
+      <!-- Pilihan Operator -->
+      <select id="operator">
+        <option value="+">(+) Tambah</option>
+        <option value="-">(-) Kurang</option>
+        <option value="*">(*) Kali</option>
+        <option value="/">(/: Bagi</option>
+      </select>
+
+      <!-- Input Angka Kedua -->
+      <input type="number" id="angka2" placeholder="Masukkan angka kedua" />
+
+      <!-- Tombol Hitung -->
+      <button onclick="hitung()">Hitung</button>
+
+      <!-- Tempat Menampilkan Hasil -->
+      <div class="hasil">Hasil: <span id="output">0</span></div>
+    </div>
+
+    <script>
+      // Fungsi utama kalkulator
+      function hitung() {
+        // Mengambil nilai dari input HTML dan mengubahnya menjadi angka (Number)
+        const angka1 = Number(document.getElementById("angka1").value);
+        const angka2 = Number(document.getElementById("angka2").value);
+        const operator = document.getElementById("operator").value;
+
+        let hasil = 0;
+
+        // Percabangan untuk menentukan operasi matematika
+        if (operator === "+") {
+          hasil = angka1 + angka2;
+        } else if (operator === "-") {
+          hasil = angka1 - angka2;
+        } else if (operator === "*") {
+          hasil = angka1 * angka2;
+        } else if (operator === "/") {
+          if (angka2 === 0) {
+            hasil = "Error: Tidak bisa bagi 0!";
+          } else {
+            hasil = angka1 / angka2;
+          }
+        }
+
+        // Menampilkan hasil ke dalam elemen HTML dengan id="output"
+        document.getElementById("output").innerText = hasil;
+      }
+    </script>
+  </body>
+</html>
