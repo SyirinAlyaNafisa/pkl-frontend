@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Kalkulator Tanpa CSS</title>
+  </head>
+  <body>
+    <h2>Kalkulator Sederhana</h2>
+    <p>
+      Angka Pertama: <br />
+      <input type="number" id="angka1" />
+    </p>
+    <p>
+      Pilih Operator: <br />
+      <select id="operator">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+      </select>
+    </p>
+    <p>
+      Angka Kedua: <br />
+      <input type="number" id="angka2" />
+    </p>
+    <p>
+      <button onclick="hitung()">Hitung</button>
+    </p>
+    <h3>Hasil: <span id="output">0</span></h3>
+
+    <script>
+      function hitung() {
+        // 1. Ambil nilai dari input HTML
+        const angka1 = Number(document.getElementById("angka1").value);
+        const angka2 = Number(document.getElementById("angka2").value);
+        const operator = document.getElementById("operator").value;
+
+        let hasil = 0;
+
+        // 2. Proses logika matematika
+        if (operator === "+") {
+          hasil = angka1 + angka2;
+        } else if (operator === "-") {
+          hasil = angka1 - angka2;
+        } else if (operator === "*") {
+          hasil = angka1 * angka2;
+        } else if (operator === "/") {
+          if (angka2 === 0) {
+            hasil = "Error: Tidak bisa bagi 0!";
+          } else {
+            hasil = angka1 / angka2;
+          }
+        }
+
+        // 3. Tampilkan hasil ke layar
+        document.getElementById("output").innerText = hasil;
+      }
+    </script>
+  </body>
+</html>

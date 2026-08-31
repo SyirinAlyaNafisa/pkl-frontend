@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalkulator Tombol HP</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #e0f7fa;
+      }
+      .kalkulator {
+        background-color: #ece278;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      }
+      /* Layar Kalkulator */
+      #layar {
+        width: 100%;
+        height: 50px;
+        background-color: #d4c6ea;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        text-align: right;
+        font-size: 2em;
+        padding: 10px;
+        box-sizing: border-box;
+        color: #4b4f37;
+        font-weight: bold;
+        overflow: hidden; /* Supaya teks tidak keluar layar kalau kepanjangan */
+      }
+      /* Grid Tombol */
+      .tombol-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* 4 kolom */
+        gap: 10px; /* Jarak antar tombol */
+      }
+      /* Styling Umum Tombol */
+      button {
+        padding: 20px;
+        font-size: 1.2em;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+      button:hover {
+        opacity: 0.8;
+      }
+      /* Tombol Angka (abu-abu muda) */
+      .btn-angka {
+        background-color: #eceff1;
+        color: #454f37;
+      }
+      /* Tombol Operator (orange) */
+      .btn-operator {
+        background-color: #df9fa4;
+        color: white;
+      }
+      /* Tombol Spesial (merah untuk C, hijau untuk =) */
+      .btn-clear {
+        background-color: #389bbe;
+        color: white;
+      }
+      .btn-sama {
+        background-color: #66af4c;
+        color: white;
+        grid-column: span 2; /* Tombol = memakan 2 kolom */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="kalkulator">
+      <!-- Layar Tampilan -->
+      <div id="layar">0</div>
+
+      <!-- Grid Tombol -->
+      <div class="tombol-grid">
+        <!-- Baris 1 -->
+        <button class="btn-clear" onclick="bersihkanLayar()">C</button>
+        <button class="btn-operator" onclick="tambahKeLayar('/')">/</button>
+        <button class="btn-operator" onclick="tambahKeLayar('*')">×</button>
+        <button class="btn-operator" onclick="tambahKeLayar('-')">-</button>
+
+        <!-- Baris 2 -->
+        <button class="btn-angka" onclick="tambahKeLayar('7')">7</button>
+        <button class="btn-angka" onclick="tambahKeLayar('8')">8</button>
+        <button class="btn-angka" onclick="tambahKeLayar('9')">9</button>
+        <button class="btn-operator" onclick="tambahKeLayar('+')">+</button>
+
+        <!-- Baris 3 -->
+        <button class="btn-angka" onclick="tambahKeLayar('4')">4</button>
+        <button class="btn-angka" onclick="tambahKeLayar('5')">5</button>
+        <button class="btn-angka" onclick="tambahKeLayar('6')">6</button>
+        <button class="btn-angka" onclick="tambahKeLayar('.')">.</button>
+
+        <!-- Baris 4 -->
+        <button class="btn-angka" onclick="tambahKeLayar('1')">1</button>
+        <button class="btn-angka" onclick="tambahKeLayar('2')">2</button>
+        <button class="btn-angka" onclick="tambahKeLayar('3')">3</button>
+        <button class="btn-angka" onclick="tambahKeLayar('0')">0</button>
+
+        <!-- Baris 5 (Tombol =) -->
+        <button class="btn-sama" onclick="hitungHasil()">=</button>
+      </div>
+    </div>
+
+    <script>
+      // Mengambil elemen layar berdasarkan ID
+      const layar = document.getElementById("layar");
+
+      // --- FUNGSI LOGIKA JAVASCRIPT ---
+
+      // 1. Fungsi untuk menambahkan angka/operator yang diklik ke layar
+      function tambahKeLayar(nilai) {
+        // Kalau isi layar masih "0", ganti dengan nilai baru. Kalau sudah ada isinya, sambungkan.
+        if (layar.innerText === "0") {
+          layar.innerText = nilai;
+        } else {
+          layar.innerText += nilai; // Gabungkan string (misal: "1" + "2" jadi "12")
+        }
+      }
+
+      // 2. Fungsi untuk membersihkan layar (tombol C)
+      function bersihkanLayar() {
+        layar.innerText = "0";
+      }
+
+      // 3. Fungsi untuk menghitung hasil akhir (tombol =)
+      function hitungHasil() {
+        // Ini adalah trik ajaib di JavaScript: function eval() bisa menghitung string matematika!
+        // Contoh: eval("10 + 5 * 2") akan langsung menghitung hasilnya.
+        try {
+          // Menggunakan eval() berbahaya di web sungguhan, tapi aman untuk latihan dasar lokal ini.
+          layar.innerText = eval(layar.innerText);
+        } catch (error) {
+          layar.innerText = "Error"; // Kalau user salah pencet rumus (misal "5+/3"), muncul Error
+        }
+      }
+    </script>
+  </body>
+</html>
