@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mini Exercise 3 - Pengolahan Data Siswa</title>
+  </head>
+  <body>
+    <h2>Form Pengolahan Data Siswa</h2>
+
+    <!-- Form Input Data -->
+    <p>
+      Nama Siswa: <br />
+      <input type="text" id="inputNama" placeholder="Masukkan nama siswa..." />
+    </p>
+
+    <p>
+      Nilai Siswa: <br />
+      <input
+        type="number"
+        id="inputNilai"
+        placeholder="Masukkan nilai (0-100)..."
+      />
+    </p>
+
+    <p>
+      <button onclick="tambahData()">Simpan Data</button>
+    </p>
+
+    <hr />
+
+    <h3>Daftar Data Siswa</h3>
+
+    <!-- Tempat Menampilkan Daftar Siswa -->
+    <ul id="daftarSiswa">
+      <!-- Data siswa akan masuk ke sini secara otomatis lewat JavaScript -->
+      <li>Belum ada data siswa.</li>
+    </ul>
+
+    <script>
+      // Fungsi untuk menambah data siswa baru
+      function tambahData() {
+        // 1. Ambil nilai dari kotak input nama dan nilai
+        const nama = document.getElementById("inputNama").value;
+        const nilai = document.getElementById("inputNilai").value;
+
+        // Validasi sederhana: Pastikan tidak ada yang kosong
+        if (nama === "" || nilai === "") {
+          alert("Nama dan Nilai tidak boleh kosong!");
+          return; // Menghentikan fungsi jika kosong
+        }
+
+        // 2. Ambil elemen tempat daftar siswa (<ul>)
+        const daftar = document.getElementById("daftarSiswa");
+
+        // Jika ini data pertama, hapus teks "Belum ada data siswa"
+        if (daftar.innerHTML.includes("Belum ada data siswa")) {
+          daftar.innerHTML = ""; // Bersihkan list
+        }
+
+        // 3. Tentukan status kelulusan (Contoh logika: Jika nilai >= 75 Lulus, jika di bawahnya Remidi)
+        let status = "";
+        if (Number(nilai) >= 75) {
+          status = "Lulus";
+        } else {
+          status = "Remidi";
+        }
+
+        // 4. Buat elemen baris list baru (<li>) untuk menampung data siswa
+        const itemBaru = document.createElement("li");
+
+        // Masukkan teks ke dalam <li> tersebut
+        itemBaru.innerText =
+          "Nama: " + nama + " | Nilai: " + nilai + " (" + status + ")";
+
+        // 5. Masukkan item baru tersebut ke dalam daftar di HTML
+        daftar.appendChild(itemBaru);
+
+        // 6. Kosongkan kembali kotak input setelah data disimpan
+        document.getElementById("inputNama").value = "";
+        document.getElementById("inputNilai").value = "";
+      }
+    </script>
+  </body>
+</html>
